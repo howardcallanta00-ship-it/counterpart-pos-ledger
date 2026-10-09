@@ -1,0 +1,8 @@
+.git
+.env
+vendor
+writable/cache/*
+writable/logs/*
+writable/session/*
+public/uploads/avatars/*
+tests/coverage*

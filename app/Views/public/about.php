@@ -1,0 +1,4 @@
+<?= $this->extend('layouts/main') ?><?= $this->section('content') ?>
+<header class="page-head"><p class="kicker">About the build</p><h1>A database-backed evolution of the TFA exercises.</h1></header>
+<div class="prose-grid"><section><h2>What it manages</h2><p>Counterpart manages customer contact records and authenticated staff accounts for an educational POS administration workflow. It replaces static arrays with MySQL-compatible persistence, migrations, validation, sessions, and protected routes.</p></section><section><h2>What it is not</h2><p>This is a polished learning and demonstration system, not a payment processor or a promise of production-grade availability on free hosting. Render may sleep and discard local files. Evaluation database plans have strict capacity limits and no guaranteed SLA.</p></section></div>
+<?= $this->endSection() ?>

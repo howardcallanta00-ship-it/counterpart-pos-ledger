@@ -1,0 +1,6 @@
+<?= $this->extend('layouts/main') ?><?= $this->section('content') ?>
+<div class="auth-layout"><div><p class="kicker">Protected register</p><h1>Staff sign in</h1><p>Use your assigned account to work with customer and staff records.</p></div><form class="form-panel" action="/login" method="post"><?= csrf_field() ?>
+<?php $errors=session()->getFlashdata('errors') ?? []; ?><div class="field"><label for="username">Username</label><input id="username" name="username" autocomplete="username" required value="<?= esc(old('username')) ?>" <?= isset($errors['username'])?'aria-invalid="true" aria-describedby="username-error"':'' ?>><?php if(isset($errors['username'])):?><p class="field-error" id="username-error"><?= esc($errors['username']) ?></p><?php endif ?></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password" name="password" autocomplete="current-password" required <?= isset($errors['password'])?'aria-invalid="true" aria-describedby="password-error"':'' ?>><?php if(isset($errors['password'])):?><p class="field-error" id="password-error"><?= esc($errors['password']) ?></p><?php endif ?></div>
+<button class="button button-block" type="submit">Sign in securely</button></form></div>
+<?= $this->endSection() ?>

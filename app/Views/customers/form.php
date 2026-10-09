@@ -1,0 +1,7 @@
+<?= $this->extend('layouts/main') ?><?= $this->section('content') ?>
+<?php $editing=$customer!==null; $errors=session()->getFlashdata('errors') ?? []; ?>
+<header class="page-head"><p class="kicker">Customer ledger</p><h1><?= $editing?'Edit customer':'New customer' ?></h1><p><?= $editing?'Correct the details below.':'Add a contact record for counter staff.' ?></p></header>
+<form class="form-panel form-wide" action="<?= $editing?'/customers/'.(int)$customer['id']:'/customers' ?>" method="post"><?= csrf_field() ?>
+<?php foreach([['full_name','Full name','text','name'],['email','Email address','email','email'],['phone','Phone number','tel','tel']] as [$name,$label,$type,$autocomplete]): $value=old($name,$customer[$name]??''); ?><div class="field"><label for="<?= $name ?>"><?= $label ?><?= $name==='phone'?' <span class="optional">Optional</span>':'' ?></label><input id="<?= $name ?>" name="<?= $name ?>" type="<?= $type ?>" autocomplete="<?= $autocomplete ?>" maxlength="<?= $name==='phone'?20:100 ?>" value="<?= esc($value) ?>" <?= $name!=='phone'?'required':'' ?> <?= isset($errors[$name])?'aria-invalid="true" aria-describedby="'.$name.'-error"':'' ?>><?php if(isset($errors[$name])):?><p class="field-error" id="<?= $name ?>-error"><?= esc($errors[$name]) ?></p><?php endif ?></div><?php endforeach ?>
+<div class="form-actions"><button class="button" type="submit"><?= $editing?'Save changes':'Create customer' ?></button><a class="button-secondary" href="/customers">Cancel</a></div></form>
+<?= $this->endSection() ?>

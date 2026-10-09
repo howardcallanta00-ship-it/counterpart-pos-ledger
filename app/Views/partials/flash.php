@@ -1,0 +1,2 @@
+<?php foreach(['success','error','info'] as $kind): ?><?php if($message=session()->getFlashdata($kind)): ?><div class="flash flash-<?= $kind ?>" role="status"><strong><?= ucfirst($kind) ?>:</strong> <?= esc($message) ?></div><?php endif ?><?php endforeach ?>
+<?php $allErrors=session()->getFlashdata('errors') ?? []; if(isset($allErrors['form'])): ?><div class="flash flash-error" role="alert"><?= esc($allErrors['form']) ?></div><?php endif ?>

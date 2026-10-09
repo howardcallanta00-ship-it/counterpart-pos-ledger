@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: counterpart-pos
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: CI_ENVIRONMENT
+        value: production
+      - key: app_baseURL
+        sync: false
+      - key: database_default_hostname
+        sync: false
+      - key: database_default_database
+        sync: false
+      - key: database_default_username
+        sync: false
+      - key: database_default_password
+        sync: false
+      - key: database_default_DBDriver
+        value: MySQLi
+      - key: database_default_port
+        value: "3306"
+      - key: session_cookieSecure
+        value: "true"
+      - key: avatar_driver
+        value: object

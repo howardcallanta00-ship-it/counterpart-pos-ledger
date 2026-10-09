@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    ports: ["8080:8080"]
+    environment:
+      CI_ENVIRONMENT: development
+      app_baseURL: http://localhost:8080/
+      database_default_hostname: db
+      database_default_database: counterpart
+      database_default_username: counterpart
+      database_default_password: local-only
+      database_default_DBDriver: MySQLi
+      DEMO_SEED_ENABLED: "true"
+      avatar_driver: local
+    volumes:
+      - avatar_data:/var/www/html/public/uploads/avatars
+    depends_on:
+      db: {condition: service_healthy}
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: counterpart
+      MARIADB_USER: counterpart
+      MARIADB_PASSWORD: local-only
+      MARIADB_ROOT_PASSWORD: local-root-only
+    volumes: ["db_data:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  db_data:
+  avatar_data:
